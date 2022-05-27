@@ -31,9 +31,6 @@ function resize(){
     canvas.height = screen.height;
 }
 resize();
-// window.onresize = ()=>{
-//     resize();
-// }
 
 const sign_methods = document.getElementById("sign-in_sign-up");
 const active_method_line = document.getElementById("active-method-line");
