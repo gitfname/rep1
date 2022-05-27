@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ripple/ripple.css">
+    <link rel="stylesheet" href="floatingPlaceHolder.css">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            --form-width: min(90%, 480px);
+        }
+        body{
+            height: 100vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row;
+            flex-flow: row;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .form{
+            width: var(--form-width);
+            height: 100%;
+            font-family: sans-serif;
+            font-weight: 500;
+            overflow: hidden;
+        }
+        #sign-in_sign-up{
+            display: block;
+            margin-inline: auto;
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row;
+            flex-flow: row;
+            -webkit-column-gap: 15px;
+            -moz-column-gap: 15px;
+            column-gap: 15px;
+            padding-bottom: 8px;
+            font-weight: 400;
+            font-size: 17px;
+            color: hsl(0, 0%, 93%);
+            margin-top: 60px;
+            width: 95%;
+        }
+        #sign-in_sign-up #active-method-line{
+            content: "";
+            position: absolute;
+            height: 1px;
+            background-color: hsl(0, 0%, 80%);
+            bottom: 0px;
+            left: 0px;
+            -webkit-transition: left 250ms ease, width 350ms ease;
+            -o-transition: left 250ms ease, width 350ms ease;
+            transition: left 250ms ease, width 350ms ease;
+        }
+        #sign-in_sign-up .sign-method{
+            cursor: pointer;
+        }
+        .fields{
+            margin-top: 40px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-flow: column;
+                    flex-flow: column;
+            row-gap: 30px;
+            position: relative;
+            width: 100%;
+        }
+        .fields.active .field{
+            opacity: 0;
+            -webkit-animation-name: var(--anim-directtion);
+            animation-name: var(--anim-directtion);
+            -webkit-animation-duration: 550ms;
+            animation-duration: 550ms;
+            -webkit-animation-timing-function: ease;
+            animation-timing-function: ease;
+            -webkit-animation-delay: var(--field);
+            animation-delay: var(--field);
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+        .fields.in-active{
+            display: none;
+        }
+        @-webkit-keyframes anim-show-ltr {
+            to{
+               opacity: 1; 
+            }
+        }
+        @keyframes anim-show-ltr {
+            to{
+               opacity: 1; 
+            }
+        }
+        @-webkit-keyframes anim-show-rtl {
+            to{
+                opacity: 1;
+            }
+        }
+        @keyframes anim-show-rtl {
+            to{
+                opacity: 1;
+            }
+        }
+        .field{
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row;
+            flex-flow: row;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 100%;
+        }
+        input{
+            border-radius: 8px;
+            border: 1px solid hsl(0, 0%, 50%);
+            background-color: #3f4552;
+            padding: 12px!important;
+            color: hsl(0, 0%, 95%)!important;
+            font-size: 18px!important;
+            outline: none;
+        }
+        input:focus{
+            background-color: #353b47;
+        }
+        .floatingPlaceholder{
+            text-align: center;
+        }
+        .signup-btn{
+            width: 100%;
+            padding: 10px 2px;
+            border: 1px solid hsl(0, 0%, 40%);
+            border-radius: 8px;
+            background-color: #252d43;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            color: hsl(0, 0%, 95%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="starFalling-1"></canvas>
+    </div>
+
+    <div class="form">
+        <h1 id="sign-in_sign-up">
+            <span class="sign-method" target="signIn">Sign in</span>
+            <span class="sign-method" target="signUp">Sign up</span>
+            <div id="active-method-line"></div>
+        </h1>
+
+        <div class="fields sign-in-filed active" id="signIn" style="--anim-directtion: anim-show-ltr;">
+            <div class="field" style="--field: 70ms;">
+                <div class="floatingPlaceholder">
+                    <input type="text" id="username" placeholder=" ">
+                    <label>User name</label>
+                    <img src="user-24.png">
+                </div>
+            </div>
+
+            <div class="field" style="--field: 140ms;">
+                <div class="floatingPlaceholder">
+                    <input type="password" id="username" placeholder=" ">
+                    <label>Password</label>
+                    <img src="user-security-24.png">
+                </div>
+            </div>
+
+            <div class="field" style="--field: 210ms;">
+                <button effect="ripple" class="signup-btn">Sign in</button>
+            </div>
+        </div>
+
+        <div class="fields sign-up-filed in-active" id="signUp" style="--anim-directtion: anim-show-rtl;">
+            <div class="field" style="--field: 70ms;">
+                <div class="floatingPlaceholder">
+                    <input type="text" id="username" placeholder=" ">
+                    <label>User name</label>
+                    <img src="user-24.png">
+                </div>
+            </div>
+
+            <div class="field" style="--field: 140ms;">
+                <div class="floatingPlaceholder">
+                    <input type="email" id="username" placeholder=" ">
+                    <label>Email Address</label>
+                    <img src="at-sign-24.png">
+                </div>
+            </div>
+
+            <div class="field" style="--field: 210ms;">
+                <div class="floatingPlaceholder">
+                    <input type="password" id="username" placeholder=" ">
+                    <label>Password</label>
+                    <img src="user-security-24.png">
+                </div>
+            </div>
+
+            <div class="field" style="--field: 280ms;">
+                <button effect="ripple" class="signup-btn">Sign up</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="index.js"></script>
+    <!-- <script src="ripple/ripple.js"></script> -->
+    <!-- <script src="starback.js"></script> -->
+    <!-- <script>
+        const sign_in_filed = document.querySelector(".sign-in-filed");
+        const sign_up_filed = document.querySelector(".sign-up-filed");
+
+        const canvas = document.getElementById("starFalling-1");
+        const starback = new Starback(canvas, {
+            type: "dot",
+            quantity: 35,
+            direction: 35,
+            backgroundColor: ['#0e1118', '#232b3e'],
+            randomOpacity: true,
+            showFps: false,
+            speed: 0.2,
+            starSize: [0.8, 2.5]
+        });
+        function resize(){
+            canvas.width = document.documentElement.clientWidth;
+            canvas.height = document.documentElement.clientHeight;
+        }
+        resize();
+        window.onresize = ()=>{
+            resize();
+        }
+
+        const sign_methods = document.getElementById("sign-in_sign-up");
+        const active_method_line = document.getElementById("active-method-line");
+        const form = document.querySelector(".form");
+        
+        active_method_line.style.width = sign_methods.children[0].getBoundingClientRect().width + "px";
+        
+        for(let child of sign_methods.children){
+            child.addEventListener("click", e=>{
+                let {left, width} = child.getBoundingClientRect();
+                left = left - sign_methods.getBoundingClientRect().left;
+
+                active_method_line.style.left = left + "px";
+                active_method_line.style.width = width + "px";
+
+                if(child.hasAttribute("target")){
+                    const target_sign_method = document.getElementById(child.getAttribute("target"));
+                    form.querySelector(".active").classList.replace("active", "in-active");
+                    target_sign_method.classList.replace("in-active", 'active');
+                }
+            });
+        }
+    </script> -->
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+.floatingPlaceholder{
+    position: relative;
+    padding: 0px;
+    width: 100%;
+}
+.floatingPlaceholder label{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    left: 20px;
+    -webkit-transition: all 450ms ease;
+    -o-transition: all 450ms ease;
+    transition: all 450ms ease;
+    font-size: 16px;
+    font-family: sans-serif;
+    color: hsl(0, 0%, 90%);
+    cursor: text;
+    pointer-events: none;
+}
+.floatingPlaceholder input{
+    padding: 10px 4px;
+    font-size: 19px;
+    font-weight: 400;
+    font-family: sans-serif;
+    outline: none;
+    width: 100%;
+    letter-spacing: 1px;
+    -webkit-transition: border 250ms;
+    -o-transition: border 250ms;
+    transition: border 250ms;
+}
+.floatingPlaceholder input:not(:valid){
+    border: 1px solid hsl(1, 90%, 50%);
+}
+.floatingPlaceholder input:not(:-moz-placeholder-shown)+label{
+    left: 40px;
+    opacity: 0;
+}
+.floatingPlaceholder input:not(:-ms-input-placeholder)+label{
+    left: 40px;
+    opacity: 0;
+}
+.floatingPlaceholder input:focus+label, .floatingPlaceholder input:not(:placeholder-shown)+label{
+    left: 40px;
+    opacity: 0;
+}
+.floatingPlaceholder img{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
