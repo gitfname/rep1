@@ -27,13 +27,13 @@ const starback = new Starback(canvas, {
     starSize: [0.8, 2.5]
 });
 function resize(){
-    canvas.width = document.documentElement.clientWidth;
-    canvas.height = document.documentElement.clientHeight;
+    canvas.width = screen.width;
+    canvas.height = screen.height;
 }
 resize();
-window.onresize = ()=>{
-    resize();
-}
+// window.onresize = ()=>{
+//     resize();
+// }
 
 const sign_methods = document.getElementById("sign-in_sign-up");
 const active_method_line = document.getElementById("active-method-line");
